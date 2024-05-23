@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+require("dotenv").config()
 
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://abhinavbmanoj:4mEq5UgBIA39LkjB@cluster0.ysjc0tt.mongodb.net/kanban-app",
+      process.env.MONGO-DB,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
