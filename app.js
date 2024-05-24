@@ -1,27 +1,26 @@
 const express = require("express");
-const mongoDB = require("./config/db")
-const bodyParser = require("body-parser")
-const userRouter = require('./routes/userRouter')
-const cors = require("cors")
-const cookieParser = require("cookie-parser")
+const mongoDB = require("./config/db");
+const bodyParser = require("body-parser");
+const userRouter = require("./routes/userRouter");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
-
 
 const app = express();
 
-app.use(cors())
+// CONNECT TO MONGODB
+mongoDB();
 
+// MIDDLEWARE
+app.use(cors());
+app.use(bodyParser.json());
+app.use(cookieParser());
 
-mongoDB()
+// ROUTES
+app.use("/", userRouter);
 
-app.use('/',userRouter)
-
-app.use(bodyParser.json())
-app.use(cookieParser())
-
-const port = process.env.PORT
-
-
+// START SERVER
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
-  console.log(`Backend running on port. ${port}`);
+  console.log(`Backend running on port ${port}`);
 });

@@ -13,7 +13,7 @@ const signupPost = async (req, res) => {
     };
     const user = new User(newUser);
     user.save();
-    const userForToken = await User.findOne({email : userDetails.email});
+    const userForToken = await User.findOne({ email: userDetails.email });
 
     const token = jwt.sign(
       {
@@ -26,7 +26,7 @@ const signupPost = async (req, res) => {
       }
     );
 
-    res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 }); 
+    // res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 });
 
     res.status(200).send({ message: "user registered sucessfully" });
   } catch (error) {
@@ -59,7 +59,7 @@ const loginPost = async (req, res) => {
         }
       );
 
-      res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 }); // 24 hour expiry
+      // res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 }); // 24 hour expiry
 
       console.log("User logged in successfully using email and password !");
       res.status(200).send({ token });
@@ -77,7 +77,7 @@ const loginPost = async (req, res) => {
 const addTask = async (req, res) => {
   try {
     const userId = req.user.id;
-    const user = await User.findOne({_id:userId});
+    const user = await User.findOne({ _id: userId });
     user.tasks.push(req.body.task);
     user.save();
   } catch (error) {
@@ -88,7 +88,6 @@ const addTask = async (req, res) => {
 
 const getTasks = async (req, res) => {
   try {
-    console.log("Iam here heeeeeeeeeeeeeeeeee");
     const userId = req.user.id;
     const user = await User.findOne({ _id: userId });
     res.status(200).json({ data: user.tasks });

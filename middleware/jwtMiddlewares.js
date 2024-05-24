@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const verifyToken = (req, res, next) => {
+  // console.log("cookies :", req.cookies)
+
   const token = req.body.token;
   if (!token) {
     return res.status(404).json({ error: "Token not found" });
