@@ -115,4 +115,45 @@ const editTaskStatus = async (req, res) => {
   }
 };
 
-module.exports = { signupPost, loginPost, addTask, getTasks, editTaskStatus };
+const editTask = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findOne({ _id: userId });
+    user.tasks.map((task) => {
+      if (task.id === req.body.id) {
+        task.content = req.body.content;
+      }
+    });
+
+    user.save();
+    res.status(200).json({ message: "Task edited successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Interal server error" });
+  }
+};
+
+const removeTask = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findOne({ _id: userId });
+    const index = user.tasks.findIndex((task) => task.id === req.body.id);
+    console.log("index : ", index);
+    user.tasks.splice(index, 1);
+    user.save();
+    res.status(200).json({ message: "Internal server error" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({error : 'Inernal server error'})
+  }
+};
+
+module.exports = {
+  signupPost,
+  loginPost,
+  addTask,
+  getTasks,
+  editTaskStatus,
+  editTask,
+  removeTask,
+};

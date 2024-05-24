@@ -13,6 +13,9 @@ router.post("/signup",userController.signupPost)
 router.post("/login", userController.loginPost)
 router.post("/add/task",verifyToken, userController.addTask)
 
-router.put("/task/editStatus",verifyToken,userController.editTaskStatus)
+router.put("/task/editStatus",verifyToken, userController.editTaskStatus)
+router.put("/task/edit",verifyToken, userController.editTask)
+
+router.post("/delete/task",verifyToken, userController.removeTask)
 
 module.exports = router
