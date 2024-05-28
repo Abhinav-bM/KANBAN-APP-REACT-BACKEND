@@ -26,7 +26,7 @@ const signupPost = async (req, res) => {
       }
     );
 
-    // res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 });
+    res.cookie("jwt", token, { httpOnly: true, secure : true, maxAge: 86400000 });
 
     res.status(200).send({ message: "user registered sucessfully" });
   } catch (error) {
