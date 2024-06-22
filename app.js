@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use("/", userRouter);
 
 // START SERVER
-const port = process.env.PORT || 3001;
+const port = 3001;
 app.listen(port, () => {
   console.log(`Backend running on port ${port}`);
 });
