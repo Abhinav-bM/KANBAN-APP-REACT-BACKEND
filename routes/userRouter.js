@@ -7,7 +7,7 @@ const {verifyToken} = require("../middleware/jwtMiddlewares")
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {res.send("hello world")})
+router.get("/", userController.home)
 router.post("/get/tasks",verifyToken, userController.getTasks)
 
 router.post("/signup",userController.signupPost)

@@ -148,6 +148,10 @@ const removeTask = async (req, res) => {
   }
 };
 
+const home = async(req, res) => {
+  res.send("hello world")
+}
+
 module.exports = {
   signupPost,
   loginPost,
@@ -156,4 +160,5 @@ module.exports = {
   editTaskStatus,
   editTask,
   removeTask,
+  home,
 };
