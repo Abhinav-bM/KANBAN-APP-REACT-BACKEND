@@ -12,7 +12,8 @@ const app = express();
 mongoDB();
 
 // MIDDLEWARE
-app.use(cors());
+app.use(cors({ origin: "https://kanban-app-react-frontend.vercel.app", credentials: true }));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 

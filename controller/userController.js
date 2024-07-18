@@ -149,7 +149,7 @@ const removeTask = async (req, res) => {
 };
 
 const home = async(req, res) => {
-  res.send("hello world")
+  res.send("Welcome kanban backend")
 }
 
 module.exports = {
